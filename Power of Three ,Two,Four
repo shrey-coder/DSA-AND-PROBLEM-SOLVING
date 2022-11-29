@@ -1,0 +1,40 @@
+class Solution {
+    public boolean isPowerOfThree(int n) {
+        boolean b=false;
+        if(n==0)
+        return false;
+        if(n==1)
+        return true;
+        if(n%3==0)
+        b=isPowerOfThree(n/3);
+        return b;
+    }
+}
+
+/* 2 */
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+        boolean b=false;
+        if(n==0)
+        return false;
+        if(n==1)
+        return true;
+        if(n%2==0)
+        b=isPowerOfTwo(n/2);
+        return b;
+    }
+}
+
+/* 4 */
+class Solution {
+    public boolean isPowerOfFour(int n) {
+        boolean b=false;
+        if(n==0)
+        return false;
+        if(n==1)
+        return true;
+        if(n%4==0)
+        b=isPowerOfFour(n/4);
+        return b;
+    }
+}
