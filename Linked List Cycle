@@ -1,0 +1,25 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        HashSet<ListNode> s=new HashSet<ListNode>();
+        ListNode t=head;
+        while(t!=null && t.next!=null )
+        {
+            s.add(t);
+            if(s.contains(t.next))
+            return true;
+            t=t.next;
+        }
+        return false;
+    }
+}
