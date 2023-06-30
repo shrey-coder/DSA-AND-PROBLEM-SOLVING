@@ -1,0 +1,45 @@
+class Solution {
+    public int splitArray(int[] nums, int k) {
+        int start = 0;
+        int sum = 0;
+        for(int i=0;i<nums.length;i++)
+        sum+=nums[i];
+        int end = sum;
+        int ans = -1;
+        int mid = 0;
+        while(start<=end)
+        {
+            mid = start + (end-start)/2;
+            if(isPossible(nums,k,mid))
+            {
+                ans = mid;
+                end = mid -1;
+            }
+            else
+            {
+                start = mid + 1;
+            }
+        }
+        return ans;
+    }
+    public static boolean isPossible(int []nums,int k,int mid)
+    {
+        int studentCount = 1;
+        int pagenumbers = 0;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(pagenumbers + nums[i] <= mid)
+            {
+                pagenumbers += nums[i];
+            }
+            else
+            {
+                studentCount++;
+                if(studentCount > k || nums[i] > mid)
+                return false;
+                pagenumbers = nums[i];
+            }
+        }
+        return true;
+    }
+}
