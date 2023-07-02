@@ -1,0 +1,39 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+        int []count1 = new int[26];
+        for(int i=0;i<s1.length();i++)
+        count1[s1.charAt(i)-'a']++;
+
+        int i=0;
+        int windowsize = s1.length();
+        int []count2 = new int[26];
+        while(i<windowsize && i<s2.length())
+        {
+            count2[s2.charAt(i)-'a']++;
+            i++;
+        }
+
+        if(compare(count1,count2))
+        return true;
+
+        while(i<s2.length())
+        {
+            count2[s2.charAt(i)-'a']++;
+            count2[s2.charAt(i-windowsize)-'a']--;
+            if(compare(count1,count2))
+            return true;
+            i++;
+        }
+        return false;
+
+    }
+
+    public boolean compare(int[]count1,int[]count2)
+    {
+        for(int i=0;i<26;i++)
+        if(count1[i]!=count2[i])
+        return false;
+
+        return true;
+    }
+}
