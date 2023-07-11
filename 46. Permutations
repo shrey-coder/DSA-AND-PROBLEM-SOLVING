@@ -1,0 +1,32 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        int index = 0;
+        Integer []nums1 = new Integer[nums.length];
+        for(int i=0;i<nums.length;i++)
+        nums1[i] = nums[i];
+        List<List<Integer>> al = (List)new ArrayList<ArrayList<Integer>>();
+        solve(index,al,nums1);
+        return al;
+    }
+
+    static void solve(int index,List<List<Integer>> al,Integer []nums)
+    {
+        if(index>nums.length-1)
+        {
+            al.add(Arrays.asList(Arrays.copyOf(nums,nums.length)));
+            return ;
+        }
+
+    int temp = 0;
+        for(int i=index;i<nums.length;i++)
+        {
+            temp = nums[i];
+            nums[i] = nums[index];
+            nums[index]=temp;
+            solve(index+1,al,nums);
+            temp = nums[i];
+            nums[i] = nums[index];
+            nums[index]=temp;
+        }
+    }
+}
