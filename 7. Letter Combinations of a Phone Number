@@ -1,0 +1,27 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        int index = 0;
+        List<String> l = new ArrayList<String>();
+        String[]map = new String[]{"","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz"};
+        solve(index,l,map,digits,"");
+        return l;
+    }
+    static void solve(int index,List<String> l,String[]map,String digits,String output)
+    {
+        if(index > digits.length()-1)
+        {
+        if(!output.equals(""))
+        l.add(output);
+        return;
+        }
+
+        int n = Integer.parseInt(digits.substring(index,index+1));
+        String val = map[n];
+        for(int i=0;i<val.length();i++)
+        {
+            output+=val.charAt(i);
+            solve(index+1,l,map,digits,output);
+            output = output.substring(0,index);
+        }
+    }
+}
