@@ -1,0 +1,77 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length==0)
+        return null;
+        if(lists.length==1)
+        return lists[0];
+        ListNode l1 = null;
+        HashMap<Integer,ListNode> map = new HashMap<Integer,ListNode>();
+        int count=0,count1=0;
+        while(count1<lists.length)
+        {
+            if(lists[count1]!=null)
+            {
+            map.put(count,lists[count1]);
+            count++;
+            }
+            count1++;
+        }
+        System.out.println(map);
+        if(map.size()==0)
+        return null;
+        if(map.size()==1)
+        return map.get(0);
+        if(map.get(0).val<=map.get(1).val)
+        {
+            l1 = merge(map.get(0),map.get(1),1,map);
+        }
+        else
+        {
+            l1 = merge(map.get(1),map.get(0),1,map);
+        }
+        return l1;
+    }
+    public static ListNode merge(ListNode first,ListNode sec,int count,HashMap<Integer,ListNode> map)
+    {
+        ListNode curr1=first,next1=curr1.next,curr2=sec,next2=curr2.next;
+        while(next1!=null && curr2!=null)
+        {
+            if(curr2.val >= curr1.val && curr2.val<=next1.val)
+            {   
+                curr1.next = curr2;
+                curr2.next = next1;
+                curr2=next2;
+                if(next2!=null)
+                next2=next2.next;
+                curr1=curr1.next;
+            }
+            else
+            {
+                curr1=curr1.next;
+                next1=next1.next;
+            }
+        }
+
+        if(next1==null)
+        curr1.next=curr2;
+
+        if(count<map.size()-1)
+        {
+                if(first.val<=map.get(count+1).val)
+                first=merge(first,map.get(count+1),count+1,map);
+                else
+                first=merge(map.get(count+1),first,count+1,map);            
+        }
+      return first;  
+    }
+}
