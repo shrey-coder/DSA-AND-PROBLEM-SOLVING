@@ -1,0 +1,51 @@
+class Solution {
+    public int[] asteroidCollision(int[] asteroids) {
+        boolean done = false;
+        int j=0,destroy=0,a1=0,a2=0;
+        while(done!=true)
+        {
+            done = true;
+            j=0;
+            for(int i=1;i<asteroids.length;i++)
+            {
+                if(asteroids[j]>0 && asteroids[i]<0)
+                {
+                    a1=asteroids[j];
+                    a2=-asteroids[i];
+                    if(a1<a2)
+                        asteroids[j]=0;
+                    else if(a2<a1)
+                        asteroids[i]=0;
+                    else
+                    {
+                        asteroids[i]=0;
+                        asteroids[j]=0;
+                        destroy++;
+                    }
+                    j=i;
+                    destroy++;
+                    done=false;
+                }
+                else if(asteroids[j]==0 && asteroids[i]!=0 || asteroids[j]!=0 && asteroids[i]==0)
+                {
+                    if(asteroids[j]==0 && asteroids[i]!=0)
+                    j=i;
+                }
+                else
+                {
+                    j=i;
+                }
+            }
+
+        }
+        int[]ans= new int[asteroids.length-destroy];
+        int k=0;
+        for(int i=0;i<asteroids.length;i++)
+        if(asteroids[i]!=0)
+        {
+        ans[k]=asteroids[i];
+        k++;
+        }
+        return ans;
+    }
+}
