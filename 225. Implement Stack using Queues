@@ -1,0 +1,67 @@
+import java.util.*;
+class MyStack {
+    private ArrayDeque<Integer> q1;
+    private ArrayDeque<Integer> q2;
+    Boolean enb_1,enb_2;
+    public MyStack() {
+        q1=new ArrayDeque<Integer>();
+        q2=new ArrayDeque<Integer>();
+        enb_1 = true;
+        enb_2=false;
+    }
+    
+    public void push(int x) {
+        if(enb_1)
+        {
+            q1.add(x);
+        }
+        else
+            q2.add(x);
+    }
+    
+    public int pop() {
+        if(enb_1 && q1.size()!=0)
+        {
+            while(q1.size()!=1)
+            q2.add(q1.remove());
+            enb_2=true;
+            enb_1=false;
+            return q1.remove(); 
+        }   
+        else if(enb_2 && q2.size()!=0)
+        {
+            while(q2.size()!=1)
+            q1.add(q2.remove());
+            enb_2=false;
+            enb_1=true;
+            return q2.remove();
+        }
+        return -1;
+    }
+    
+    public int top() {
+        if(enb_1 && q1.size()!=0)
+        {
+            return q1.peekLast();
+        }
+        else if(enb_2 && q2.size()!=0)
+        return q2.peekLast();
+        return -1;
+    }
+    
+    public boolean empty() {
+        if(q1.size()==0 && q2.size()==0)
+        return true;
+        else
+        return false;
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
