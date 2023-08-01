@@ -1,0 +1,28 @@
+import java.util.*;
+class Solution {
+    public List<List<Integer>> l;
+    public List<List<Integer>> combine(int n, int k) {
+        l = new ArrayList<List<Integer>>();
+        solve(1,n,k,k,new ArrayList<Integer>());
+        return l;
+    }
+    public void solve(int i,int n,int len,int count,List<Integer> l1)
+    {
+        if(i>n || count==0)
+        {
+            if(l1.size()==len)
+            {
+                List<Integer> l2 = new ArrayList<Integer>(l1);
+                l.add(l2);
+            }
+            return;
+        }
+        for(int j=i;j<=n;j++)
+        {
+            l1.add(j);
+            solve(j+1,n,len,count-1,l1);
+            l1.remove(l1.size()-1);
+        }
+        return;
+    }
+}
