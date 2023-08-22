@@ -1,0 +1,20 @@
+class Solution {
+    public String convertToTitle(int columnNumber) {
+        StringBuilder ans = new StringBuilder("");
+        int q=columnNumber,r=0;
+        while(q>26)
+        {
+            r = q%26;
+            q = q/26;
+            if(r!=0)
+            ans.insert(0,(char)('A'+r-1));
+            else
+            {
+            ans.insert(0,(char)('Z'));
+            q--;
+            }
+        }
+        ans.insert(0,(char)('A'+q-1));  
+        return ans.toString();
+    }
+}
