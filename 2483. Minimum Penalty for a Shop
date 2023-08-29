@@ -1,0 +1,25 @@
+class Solution {
+    public int bestClosingTime(String customers) {
+        int n=0,y=0,ans=0,last_ans=0;
+        char[]c = customers.toCharArray();
+        for(int i=0;i<c.length;i++)
+        {
+            if(c[i]=='Y')    y++;
+        }
+        ans = 0;
+        last_ans = n+y;
+        for(int i=1;i<=c.length;i++)
+        {
+            if(c[i-1]=='Y')  y--;
+            else    n++;
+            int temp = n+y;
+            if(temp<last_ans)
+            {
+                ans = i;
+                last_ans = temp;
+            }
+        }
+        return  ans;
+    }
+
+}
