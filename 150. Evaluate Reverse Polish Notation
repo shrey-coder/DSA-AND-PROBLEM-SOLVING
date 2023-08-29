@@ -1,0 +1,54 @@
+class Solution {
+    int pointer=0;
+    public int evalRPN(String[] tokens) {
+        // pointer = tokens.length-1;
+        // return solve(tokens);
+
+        //solving using stack datastructure
+        Stack<Integer> stack = new Stack<>();
+        int first, second;
+
+        for (String curr : tokens) {
+            if (curr.equals("+")) {
+                second = stack.pop();
+                first = stack.pop();
+                stack.add(first + second);
+            } else if (curr.equals("-")) {
+                second = stack.pop();
+                first = stack.pop();
+                stack.add(first - second);
+            } else if (curr.equals("*")) {
+                second = stack.pop();
+                first = stack.pop();
+                stack.add(first * second);
+            } else if (curr.equals("/")) {
+                second = stack.pop();
+                first = stack.pop();
+                stack.add(first / second);
+            } else {
+                stack.add(Integer.parseInt(curr));
+            }
+        }
+        
+        return stack.pop();
+
+    }
+
+    // Solving using recursion function
+    public int solve(String[]tokens)
+    {
+        String s = tokens[pointer--];
+        char c = s.charAt(0);
+        if(!s.equals("+") && !s.equals("-") && !s.equals("*") && !s.equals("/"))  return Integer.parseInt(s);
+        int right = solve(tokens);
+        int left = solve(tokens);
+        if(c=='+')
+            return left+right;
+        else if(c=='-')
+            return left-right;
+        else if(c=='*')
+            return left*right;
+        else
+            return left/right;
+    }
+}
