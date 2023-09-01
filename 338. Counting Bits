@@ -1,0 +1,20 @@
+class Solution {
+    public int[] countBits(int n) {
+        //  int[] res = new int[n+1];
+        // for(int i=1;i<=n;i++){
+        //     res[i] = res[i/2] + i%2;
+        // }
+        // return res;
+        int[]ans = new int[n+1];
+        solve(ans,1,1);
+        return ans;
+    }
+    public void solve(int[]ans,int bits,int i)
+    {
+        if(i>=ans.length)   return;
+        ans[i] = bits;
+        i <<= 1;
+        solve(ans,bits,i);
+        solve(ans,bits+1,i+1);
+    }
+}
