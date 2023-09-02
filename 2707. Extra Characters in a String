@@ -1,0 +1,24 @@
+class Solution {
+    public int minExtraChar(String s, String[] dictionary) {
+        HashMap<String,Integer> m = new HashMap<String,Integer>();
+        int[]dp =new int[51];
+        Arrays.fill(dp,-1);
+        for(int i=0;i<dictionary.length;i++)
+            m.put(dictionary[i],dictionary[i].length());
+        return solve(s,0,m,dp);
+    }
+    public int solve(String s,int index,HashMap<String,Integer> m,int[]dp)
+    {
+        if(index>=s.length()) return 0;
+        if(dp[index]!=-1) return dp[index];
+        int count = 0,ans=51;
+        StringBuilder temp = new StringBuilder("");
+        for(int i=index;i<s.length();i++)
+        {
+            temp.append(s.charAt(i));
+            count = (m.containsKey(temp.toString())?0:temp.length()) + solve(s,i+1,m,dp);
+            ans = Math.min(ans,count);
+        }
+        return dp[index]=ans;
+    }
+}
