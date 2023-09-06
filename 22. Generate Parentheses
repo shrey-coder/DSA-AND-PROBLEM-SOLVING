@@ -1,0 +1,24 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        List<String> ls = new LinkedList<String>();
+        solve(n,n,ls,new StringBuilder(""));
+        return ls;
+    }
+    public void solve(int left,int right,List<String> ls,StringBuilder output)
+    {
+        if(left==0 && right==0)
+            ls.add(new String(output));
+        if(left>0)
+        {
+            output.append('(');
+            solve(left-1,right,ls,output);
+            output.deleteCharAt(output.length()-1);
+        }
+        if(right>left)
+        {
+            output.append(')');
+            solve(left,right-1,ls,output);
+            output.deleteCharAt(output.length()-1);
+        }
+    }
+}
