@@ -1,0 +1,23 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> ans = new ArrayList<List<Integer>>(numRows);
+        for(int row=1;row<=numRows;row++)
+        {
+            ans.add(generateRow(row));
+        }
+        return ans;
+    }
+    public List<Integer> generateRow(int row)
+    {
+        List<Integer> temp = new ArrayList<Integer>();
+        temp.add(1);
+        long ans = 1;
+        for(int i=1;i<row;i++)
+        {
+            ans = ans * (row-i);
+            ans = ans / i;
+            temp.add((int)ans);
+        }
+        return temp;
+    }
+}
