@@ -1,0 +1,26 @@
+class Solution {
+    public int minDeletions(String s) {
+        int[] freqarr = new int[26];
+        HashSet<Integer> freqset = new HashSet<Integer>();
+        int mindel = 0;
+        for(char c:s.toCharArray())
+        {
+            freqarr[c-'a']++;
+        }
+        for(int i=0;i<26;i++)
+        {
+            int freq = freqarr[i];
+                while(freq>0)
+                {
+                    if(!freqset.contains(freq))
+                    {
+                        freqset.add(freq);
+                        break;
+                    }
+                    freq--;
+                    mindel++;
+                }
+        }
+        return mindel;
+    }
+}
