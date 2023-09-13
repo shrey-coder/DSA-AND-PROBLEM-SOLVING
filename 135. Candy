@@ -1,0 +1,23 @@
+class Solution {
+    public int candy(int[] ratings) {
+        if(ratings.length==1)
+            return 1;
+        int[] ans1 = new int[ratings.length];
+        Arrays.fill(ans1,1);
+        int mincandies = 0;
+        for(int i=1;i<ratings.length;i++)
+        {
+            ans1[i] = ratings[i]>ratings[i-1] ?  ans1[i-1]+1: ans1[i];
+        }
+
+        for(int i=ans1.length-2;i>=0;i--)
+        {
+            if(ratings[i]>ratings[i+1] && ans1[i]<ans1[i+1]+1){
+                ans1[i]=ans1[i+1]+1;
+            }
+            mincandies += ans1[i];
+        }
+        mincandies += Math.max(ans1[ans1.length-1],1);
+        return mincandies;
+    }
+}
