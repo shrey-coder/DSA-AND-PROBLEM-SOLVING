@@ -1,0 +1,38 @@
+class Solution {
+    public List<String> findItinerary(List<List<String>> tickets) {
+        List<String> ans = new ArrayList<String>();
+        HashMap<String,PriorityQueue<String>> map =  new HashMap<>();
+        for(List<String> ticket : tickets)
+        {
+            String src = ticket.get(0);
+            String dest = ticket.get(1);
+            if(!map.containsKey(src))
+            {
+                PriorityQueue<String> temp = new PriorityQueue<>();
+                temp.add(dest);
+                map.put(src,temp);
+            }
+            else
+            {
+                map.get(src).add(dest);
+            }
+        }
+        String next_key = "JFK";
+        Stack<String> s = new Stack<String>();
+        s.add(next_key);
+        while(!s.isEmpty())
+        {
+            next_key = s.peek();
+            if(!map.containsKey(next_key) || map.get(next_key).size()==0)
+            {
+                ans.add(s.pop());
+            }
+            else
+            {
+                s.push(map.get(next_key).poll());
+            }
+        }
+        Collections.reverse(ans);
+        return ans;
+    }
+}
