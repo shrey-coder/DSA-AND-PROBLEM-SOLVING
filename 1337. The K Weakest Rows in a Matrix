@@ -1,0 +1,42 @@
+class Solution {
+    public int[] kWeakestRows(int[][] mat, int k) {
+        int [] length = new int[mat.length];
+        int []ans = new int[k];
+        int i=0;
+        for(int[]row : mat)
+        {  
+            length[i]=findSoldiers(row);
+            i++;
+        }
+        for(i=0;i<mat.length;i++)
+        {
+            int weaker = 0;
+            for(int j=0;j<mat.length;j++)
+            {
+                if(length[i]<length[j] || (length[i]==length[j] && i<j))
+                    weaker++;
+            }
+            if(mat.length-weaker-1<ans.length)
+                ans[mat.length-weaker-1] = i;
+        }
+        return ans;
+    }
+    public int findSoldiers(int[]arr)
+    {
+        int left = 0,right=arr.length-1,mid=0,ans=-1;
+        while(left<=right)
+        {
+            mid = (left+right)/2;
+            if(arr[mid]==1)
+            {
+                ans = mid;
+                left = mid+1;
+            }
+            else
+            {
+                right = mid-1;
+            }
+        }
+        return ans+1;
+    }
+}
