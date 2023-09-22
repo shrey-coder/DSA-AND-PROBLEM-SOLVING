@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int len1 = s.length(),len2 = t.length();
+        if(len1 == 0)
+            return true;
+        if(len2<len1 || len2==0)
+            return false;
+        char[]s1 = s.toCharArray();
+        char[]t1 = t.toCharArray();
+        int s2 = 0,t2 = 0;
+        while(t2<len2)
+        {
+            if(t1[t2]==s1[s2])
+                s2++;
+            t2++;
+            if(s2==len1)
+                return true;
+        }
+        return false;
+    }
+}
