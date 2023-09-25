@@ -1,0 +1,31 @@
+class Solution {
+    public char findTheDifference(String s, String t) {
+        // int slen = s.length(),tlen = t.length();
+        // if(slen==0)
+        //     return t.charAt(0);
+        // char[] schar = s.toCharArray(),tchar = t.toCharArray();
+        // HashMap<Character,Integer> map = new HashMap<>();
+        // for(int i=0;i<slen;i++)
+        //     if(map.containsKey(schar[i]))
+        //         map.put(schar[i],map.get(schar[i])+1);
+        //     else
+        //         map.put(schar[i],1);
+        // for(int i=0;i<tlen;i++)
+        //     if(!map.containsKey(tchar[i]) || map.get(tchar[i])==0)
+        //         return tchar[i];
+        //     else 
+        //         map.put(tchar[i],map.get(tchar[i])-1);
+        // return 'a';
+        int sum = 0;
+        for(int schar : s.toCharArray())
+        {
+            sum -= schar;
+        }
+        for(int tchar : t.toCharArray())
+        {
+            sum += tchar;
+        }
+        return (char)sum;
+
+    }
+}
