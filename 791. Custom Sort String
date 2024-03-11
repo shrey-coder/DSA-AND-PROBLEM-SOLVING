@@ -1,0 +1,36 @@
+class Solution {
+    public String customSortString(String order, String s) {
+        StringBuilder ans = new StringBuilder();
+        HashMap<Character,Integer> occr = new HashMap<Character,Integer>();
+        for(Character t: s.toCharArray())
+        {
+            if(!occr.containsKey(t))
+            occr.put(t,1);
+            else
+            occr.replace(t,occr.get(t)+1);
+        }
+        for(Character t:order.toCharArray())
+        {
+            if(occr.containsKey(t))
+            {
+                ans.append(t);
+                int c = occr.get(t);
+                if(c==1) occr.remove(t);
+                else 
+                {
+                    occr.replace(t,c-1);
+                    for(int i=0;i<occr.get(t);i++)
+                        ans.append(t);
+                    occr.remove(t);
+                }
+            }
+        }
+        
+        for(Character t:occr.keySet())
+        {
+            for(int i=0;i<occr.get(t);i++)
+                ans.append(t);
+        }
+        return ans.toString();
+    }
+}
