@@ -1,0 +1,26 @@
+class Solution {
+    public int numSubarraysWithSum(int[] nums, int goal) {
+        //find all subarrays with sum<=goal = n
+        // find all subarrays with sum<=goal-1 = m
+        // Then to get answer minus n - m
+       int l=0,r=0,sum=0,ans = 0;
+        return solve(goal,nums) - solve(goal-1,nums);      
+    }
+
+    int solve(int goal,int[]nums)
+    {
+        int res = 0,sum=0,l=0;
+        for(int i=0;i<nums.length;i++)
+        {
+            if(goal < 0)return 0;
+            sum += nums[i];
+            while(sum > goal)
+            {
+                sum -= nums[l];
+                l+=1;
+            }
+            res += i-l + 1;
+        }
+        return res;
+    }
+}
