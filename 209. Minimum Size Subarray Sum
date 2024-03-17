@@ -1,0 +1,22 @@
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+        int i = 0,j = 0,sum=0,ans=nums.length+1;
+        boolean up = false;
+        while(i<nums.length)
+        {
+            sum += nums[i];
+            if(sum>=target)
+            {
+                while(sum-nums[j]>=target)
+                {
+                    sum -= nums[j];
+                    j++;
+                }
+                ans = Math.min(i-j+1,ans);
+                up = true;
+            }
+            i++;
+        }
+        return up==false ? 0 : ans ;
+    }
+}
