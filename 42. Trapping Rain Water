@@ -1,0 +1,18 @@
+class Solution {
+    public int trap(int[] height) {
+    int[] leftMax = new int[height.length];
+        int waterLevel = 0,max = height[0];
+        for(int i=0;i<height.length;i++)
+        {
+            max = Math.max(max,height[i]);
+            leftMax[i] = max;
+        }
+        max = height[height.length-1];
+        for(int i=height.length-1;i>=0;i--)
+        {
+           max = Math.max(max,height[i]);
+           waterLevel += Math.min(leftMax[i],max)-height[i];
+        }
+        return waterLevel;
+    }
+}
