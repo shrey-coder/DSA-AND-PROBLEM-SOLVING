@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        int[] pair1 = new int[300];
+        int[] pair2 = new int[300];
+        Arrays.fill(pair1,-1);
+        Arrays.fill(pair2,-1);
+        for(int i=0;i<s.length();i++)
+        {
+            int stemp = s.charAt(i);
+            int temp = t.charAt(i);
+            if(pair1[stemp]==-1 && pair2[temp]==-1)
+            {
+              pair1[stemp] = temp;
+              pair2[temp] = stemp;
+            }
+            else if(pair1[stemp]!=temp || pair2[temp]!=stemp)
+                return false;
+        }
+        return true;
+    }
+}
