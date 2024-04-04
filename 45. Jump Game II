@@ -1,0 +1,29 @@
+class Solution {
+    public int jump(int[] nums) {
+        int max = 0,target=0,count = 0,curr = 0;
+        while(curr<nums.length-1)
+        {
+            if(curr + nums[curr]>=nums.length-1)
+            {
+                count++;
+                return count;
+            }
+            else
+            {
+                max = curr;
+                target = curr;
+                for(int i=curr;i<=curr+nums[curr];i++)
+                {
+                    if(i+nums[i]>=max)
+                    {
+                        max = i+nums[i];
+                        target = i;
+                    }
+                }
+                count++;
+                curr = target;
+            }
+        }
+        return count;
+    }
+}
