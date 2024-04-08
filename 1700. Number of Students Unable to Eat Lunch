@@ -1,0 +1,24 @@
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+       Queue<Integer> queue = new ArrayDeque<Integer>();
+       int count = 0,i=0;
+       for(i=0;i<students.length;i++)
+        queue.add(students[i]);
+        i=0;
+        while(count!=queue.size())
+        {
+            int demand = queue.remove();
+            if(demand == sandwiches[i])
+            {
+                i++;
+                count=0;
+            }
+            else
+            {
+                count++;
+                queue.add(demand);
+            }
+        }
+        return count; 
+    }
+}
